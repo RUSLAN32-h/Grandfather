@@ -24,7 +24,8 @@
         .card {
             width: 100%;
             max-width: 650px;
-            height: 450px;
+            height: auto;
+            min-height: 450px;
             perspective: 1000px;
             cursor: pointer;
         }
@@ -38,7 +39,8 @@
             transform-style: preserve-3d;
         }
         
-        .card:hover .card-inner {
+        .card:hover .card-inner,
+        .card.flipped .card-inner {
             transform: rotateY(180deg);
         }
         
@@ -124,7 +126,13 @@
             border-radius: 10px;
         }
         
-        @media (max-width: 600px) {
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .card {
+                height: auto;
+                min-height: 500px;
+            }
+            
             h1 {
                 font-size: 2rem;
             }
@@ -141,18 +149,93 @@
             .signature {
                 font-size: 1.3rem;
             }
+            
+            .flowers {
+                font-size: 2.5rem;
+            }
+            
+            .card-front, .card-back {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .card {
+                min-height: 450px;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+                margin-bottom: 15px;
+            }
+            
+            .age {
+                font-size: 3.5rem;
+                margin: 5px 0;
+            }
+            
+            .message {
+                font-size: 1rem;
+                padding: 12px;
+                line-height: 1.5;
+            }
+            
+            .signature {
+                font-size: 1.2rem;
+                margin-top: 15px;
+            }
+            
+            .flowers {
+                font-size: 2rem;
+                margin: 10px 0;
+            }
+            
+            .hint {
+                font-size: 0.9rem;
+                bottom: 15px;
+            }
+            
+            .card-front, .card-back {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .age {
+                font-size: 3rem;
+            }
+            
+            .message {
+                font-size: 0.9rem;
+            }
+            
+            .signature {
+                font-size: 1.1rem;
+            }
+            
+            .flowers {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="card">
+    <div class="card" id="birthdayCard">
         <div class="card-inner">
             <div class="card-front">
                 <h1>С Днем Рождения,</h1>
                 <div class="age">71</div>
                 <h1>Дорогой Дедушка!</h1>
                 <div class="flowers">🌷🌹🌸💐</div>
-                <p class="hint">кликни, чтобы открыть</p>
+                <p class="hint">нажми, чтобы открыть</p>
             </div>
             <div class="card-back">
                 <h1>Поздравляем с 71-летием!</h1>
@@ -162,9 +245,16 @@
                     <p>Пусть каждый твой день будет наполнен теплом, уютом и вниманием близких.</p>
                 </div>
                 <div class="signature">С любовью, твой внук ❤️</div>
-                <p class="hint">Убери палец, чтобы закрыть</p>
+                <p class="hint">нажми, чтобы закрыть</p>
             </div>
         </div>
     </div>
+
+    <script>
+        // Добавляем обработчик клика для мобильных устройств
+        document.getElementById('birthdayCard').addEventListener('click', function() {
+            this.classList.toggle('flipped');
+        });
+    </script>
 </body>
 </html>
